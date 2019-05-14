@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Giftastic</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/style.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="assets/javascript/app.js"></script>
@@ -12,6 +13,18 @@
         <div id="topics">
         </div>
 
+        <form>
+          <div class="form-group">
+            <label for="newInstrument">Add an Instrument</label>
+            <input type="text" class="form-control" id="newInstrument" placeholder="Instrument">
+          </div>
+          <div class="form-group">
+            <label for="numResults">Password</label>
+            <input type="text" class="form-control" id="numResults" placeholder="#">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        
         <div id="gifs">
         </div>
 
