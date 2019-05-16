@@ -4,9 +4,13 @@ $(document).ready(function(){
 
     //var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5");
 
+    var baseSearch = "http://api.giphy.com/v1/gifs/search?q=";
     var apiKey = "DoJ0bt0nmVdBY1sIeFbK5eu99dAFIdgb";
 
     var searchTerm;
+    var limit;
+
+    var fullQuery;
 
     // function to create new buttons and append them
     function newButton(butName) {
@@ -24,8 +28,25 @@ $(document).ready(function(){
     //create onclick for adding new instrument
     $("#addInstrument").on("click", function(){
         event.preventDefault();
-        var newInstrument = $("#newInstrument").val();
+        var newInstrument = $("#newInstrument").val().trim();
         newButton(newInstrument);
     });
 
+    //function to assemble query
+    function queryConstructor(){
+        fullQuery = baseSearch + searchTerm +"&api_key="+ apiKey +"&limit="+ limit;
+        $.ajax({
+            url: fullQuery,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
+        });
+    }
+
+    //create onclick for dynamically created search buttons
+    $(document).on("click", ".instrument" , function() {
+        searchTerm = $(this).text();
+        limit = $("#numResults").val().trim();
+        queryConstructor();
+    });
 });
