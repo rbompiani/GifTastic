@@ -25,14 +25,14 @@ $(document).ready(function(){
         newButton(curTopic);
     }
 
-    //create onclick for adding new instrument
+    // create onclick for adding new instrument
     $("#addInstrument").on("click", function(){
         event.preventDefault();
         var newInstrument = $("#newInstrument").val().trim();
         newButton(newInstrument);
     });
 
-    //function to assemble query
+    // function to assemble query
     function queryConstructor(){
         fullQuery = baseSearch + searchTerm +"&api_key="+ apiKey +"&limit="+ limit;
         $.ajax({
@@ -40,13 +40,29 @@ $(document).ready(function(){
             method: "GET"
         }).then(function(response) {
             console.log(response);
+            makeGif(response.data);
         });
     }
 
-    //create onclick for dynamically created search buttons
+    // create onclick for dynamically created search buttons
     $(document).on("click", ".instrument" , function() {
         searchTerm = $(this).text();
         limit = $("#numResults").val().trim();
         queryConstructor();
     });
+
+    // create GIF element constructor to plug into queryConstructor
+    function makeGif(response){
+        for (gifs in response){
+            var newGif = $("<img>");
+            var animUrl = response[gifs].images.fixed_height_small.url;
+            var stillUrl = response[gifs].images.fixed_height_small_still.url;
+            newGif.attr("src", stillUrl);
+            newGif.attr("anim", animUrl);
+            $("#gifs").append(newGif);
+        }
+    }
+
+
+
 });
