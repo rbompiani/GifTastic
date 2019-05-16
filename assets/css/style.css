@@ -1,0 +1,15 @@
+#favIcon {
+    fill: crimson;
+}
+
+.favIcon {
+    fill: lightgray;
+}
+
+.favIcon:hover, .fav:hover {
+    fill: lightcoral;
+}
+
+.fav {
+    fill: crimson;
+}

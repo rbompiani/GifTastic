@@ -2,8 +2,6 @@ $(document).ready(function(){
     //create array of topics
     var topics = ["piano","guitar","bass","maracas","drums","tambourine","trombone","violin","flute","trombone","tuba"];
 
-    //var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5");
-
     var baseSearch = "http://api.giphy.com/v1/gifs/search?q=";
     var apiKey = "DoJ0bt0nmVdBY1sIeFbK5eu99dAFIdgb";
 
@@ -39,21 +37,40 @@ $(document).ready(function(){
             url: fullQuery,
             method: "GET"
         }).then(function(response) {
-            console.log(response);
             makeGif(response.data);
         });
     }
 
     // create onclick for dynamically created search buttons
     $(document).on("click", ".instrument" , function() {
+        $("#gifs").empty()
         searchTerm = $(this).text();
         limit = $("#numResults").val().trim();
         queryConstructor();
     });
 
+    // create onclick for setting favorites
+    $(document).on("click", ".favIcon", function(){
+        $(this).removeClass();
+        $(this).addClass("fav");
+        $("#favorites").append($(this).parent());
+    })
+
+    // create onclick for removing favorites
+    $(document).on("click", ".fav", function(){
+        $(this).removeClass();
+        $(this).addClass("favIcon");
+        $("#gifs").append($(this).parent());
+    })
+
     // create GIF element constructor to plug into queryConstructor
     function makeGif(response){
+
         for (gifs in response){
+
+            var newThumb = $("<div>");
+            newThumb.addClass("thumb");
+
             var newGif = $("<img>");
             var animUrl = response[gifs].images.fixed_height_small.url;
             var stillUrl = response[gifs].images.fixed_height_small_still.url;
@@ -70,7 +87,24 @@ $(document).ready(function(){
                     $(this).attr("src", $(this).attr("still"));
                 }
             })
-            $("#gifs").append(newGif);
+
+            newThumb.append(newGif);
+            
+            var newFav = $("#favIcon").clone();
+            newFav.removeAttr("id");
+            newFav.addClass("favIcon");
+            console.log(newFav);
+            
+
+            newThumb.append(newFav);
+
+            var newRat = $("<span>");
+            newRat.addClass("rating");
+            newRat.text("Rating: "+ response[gifs].rating);
+
+            newThumb.append(newRat);
+
+            $("#gifs").append(newThumb);
         }
     }
 
