@@ -2,11 +2,32 @@ $(document).ready(function(){
     //create array of topics
     var topics = ["piano","guitar","bass","maracas","drums","tambourine","trombone","violin","flute","trombone","tuba"];
 
-    // for each item in topics, create a button
-    for (topic in topics){
-        var newBut = $("<button>"+topics[topic]+"</button>");
+    var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5");
+
+    var apiKey = "DoJ0bt0nmVdBY1sIeFbK5eu99dAFIdgb";
+
+    var searchTerm;
+
+    // function to create new buttons and append them
+    function newButton(butName) {
+        var newBut = $("<button>");
+        newBut.text(butName);
         newBut.addClass("instrument");
         $("#topics").append(newBut);
     }
+    // for each item in topics, create a button
+    for (topic in topics){
+        var curTopic = topics[topic];
+        newButton(curTopic);
+    }
+
+    //get input from form, add button
+    function getInstrument(){
+        var newInstrument = $("#newInstrument").value();
+        newButton(newInstrument);
+    }
+    
+    //create onclick for adding new instrument
+    
 
 });
