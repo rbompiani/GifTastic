@@ -2,7 +2,7 @@ $(document).ready(function(){
     //create array of topics
     var topics = ["piano","guitar","bass","maracas","drums","tambourine","trombone","violin","flute","trombone","tuba"];
 
-    var baseSearch = "http://api.giphy.com/v1/gifs/search?q=";
+    var baseSearch = "https://api.giphy.com/v1/gifs/search?q=";
     var apiKey = "DoJ0bt0nmVdBY1sIeFbK5eu99dAFIdgb";
 
     var searchTerm;
