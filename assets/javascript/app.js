@@ -58,7 +58,18 @@ $(document).ready(function(){
             var animUrl = response[gifs].images.fixed_height_small.url;
             var stillUrl = response[gifs].images.fixed_height_small_still.url;
             newGif.attr("src", stillUrl);
+            newGif.attr("still", stillUrl);
             newGif.attr("anim", animUrl);
+            newGif.attr("isPlay", "false");
+            newGif.on("click", function(){
+                if($(this).attr("isPlay") == "false"){
+                    $(this).attr("isPlay", "true");
+                    $(this).attr("src", $(this).attr("anim"));
+                } else {
+                    $(this).attr("isPlay", "false");
+                    $(this).attr("src", $(this).attr("still"));
+                }
+            })
             $("#gifs").append(newGif);
         }
     }
