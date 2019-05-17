@@ -53,14 +53,14 @@ $(document).ready(function(){
     $(document).on("click", ".favIcon", function(){
         $(this).removeClass();
         $(this).addClass("fav");
-        $("#favorites").append($(this).parent());
+        $("#favGifs").append($(this).closest(".thumb"));
     })
 
     // create onclick for removing favorites
     $(document).on("click", ".fav", function(){
         $(this).removeClass();
         $(this).addClass("favIcon");
-        $("#gifs").append($(this).parent());
+        $("#gifs").append($(this).closest(".thumb"));
     })
 
     // create GIF element constructor to plug into queryConstructor
@@ -89,20 +89,23 @@ $(document).ready(function(){
             })
 
             newThumb.append(newGif);
-            
+
+            var gifData = $("<div>");
+
+
             var newFav = $("#favIcon").clone();
             newFav.removeAttr("id");
-            newFav.addClass("favIcon");
-            console.log(newFav);
-            
+            newFav.addClass("favIcon");          
 
-            newThumb.append(newFav);
+            gifData.append(newFav);
 
-            var newRat = $("<span>");
+            var newRat = $("<div>");
             newRat.addClass("rating");
             newRat.text("Rating: "+ response[gifs].rating);
 
-            newThumb.append(newRat);
+            gifData.append(newRat);
+
+            newThumb.append(gifData);
 
             $("#gifs").append(newThumb);
         }
