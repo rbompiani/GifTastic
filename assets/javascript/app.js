@@ -21,6 +21,10 @@ $(document).ready(function(){
         var newBut = $("<button>");
         newBut.text(butName);
         newBut.addClass("instrument");
+        newBut.addClass("btn-outline-primary");
+        newBut.addClass("btn");
+        newBut.addClass("px-3");
+        newBut.addClass("m-1");
         $("#topics").append(newBut);
     }
 
@@ -33,8 +37,12 @@ $(document).ready(function(){
     // create onclick for adding new instrument
     $("#addInstrument").on("click", function(){
         event.preventDefault();
-        var newInstrument = $("#newInstrument").val().trim();
-        newButton(newInstrument);
+        if($("#newInstrument").val().trim()){
+            var newInstrument = $("#newInstrument").val().trim();
+            $("#newInstrument").val("");
+            newButton(newInstrument);  
+        }
+
     });
 
     /*------ QUERY -------*/
@@ -56,6 +64,7 @@ $(document).ready(function(){
         searchTerm = $(this).text();
         limit = $("#numResults").val().trim();
         queryConstructor();
+        $("#instrument").text($(this).text());
     });
 
     // create onclick for setting favorites

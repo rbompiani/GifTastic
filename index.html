@@ -2,39 +2,62 @@
 <html>
     <head>
         <title>Giftastic</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/style.css">
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="assets/javascript/app.js"></script>
     </head>
     <body>
-        <h1>Giftastic</h1>
-
-        <div id="topics">
-        </div>
-
-        <form>
-          <div class="form-group">
-            <label for="newInstrument">Add an Instrument</label>
-            <input type="text" class="form-control" id="newInstrument" placeholder="Instrument">
-            <button type="submit" id="addInstrument" class="btn btn-default">Add Instrument</button>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-3">Giftastic</h1>
+              <p class="lead">Select an instrument to Load</p>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="numResults">Number of GIFs to Return:</label>
-            <input type="text" class="form-control" id="numResults" value="10">
-          </div>
-        </form>
-        
-        <div id="gifs">
-        </div>
 
-        <div id="favorites">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" id="favIcon" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
-            <h2>Favorite Images</h2>
-            <div id="favGifs"></div>
-        </div>
+        <div class="container">
 
-        
+          <div class="row">
+            
+            <!--Aside w/ buttons & form-->
+            <aside class="col-md-4">
+
+              <div id="topics" class="pb-4">
+                <h3>Instruments</h3>
+              </div>
+
+              <form>
+                <div class="form-group">
+                  <label for="newInstrument">Add an Instrument</label>
+                  <input type="text" class="form-control" id="newInstrument" placeholder="Instrument">
+                  <button type="submit" id="addInstrument" class="btn btn-primary mt-2">Add Instrument</button>
+                </div>
+                <div class="form-group">
+                  <label for="numResults">Number of GIFs to Return:</label>
+                  <input type="number" class="form-control" id="numResults" value="10" required>
+                </div>
+              </form> 
+              
+            </aside>
+
+            <!--Section w/ instructions or gif type-->
+            <section class="col-md-8">
+              <h3 id="instrument"></h3>
+              <div id="gifs">
+              </div>
+            </section>
+
+          </div>  
+            
+         </div>   
+
+            <div id="favorites" class="jumbotron jumbotron-fluid pt-4 mb-0">
+                <div class="container">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" id="favIcon" viewBox="0 0 24 24"><path d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>
+                  <h3 id="favTitle">Favorites</h3>
+                  <div id="favGifs"></div>
+                </div>
+            </div>     
 
     </body>
 </html>
