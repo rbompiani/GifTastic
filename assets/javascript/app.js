@@ -1,15 +1,21 @@
 $(document).ready(function(){
-    //create array of topics
+
+    /*------ VARIABLES -------*/
+    // array of topics for buttons
     var topics = ["piano","guitar","bass","maracas","drums","tambourine","trombone","violin","flute","trombone","tuba"];
 
+    // static API search variables
     var baseSearch = "https://api.giphy.com/v1/gifs/search?q=";
     var apiKey = "DoJ0bt0nmVdBY1sIeFbK5eu99dAFIdgb";
 
+    // dynamic API search variables
     var searchTerm;
     var limit;
 
+    // variable to hold assembled query
     var fullQuery;
 
+    /*------ CREATE BUTTONS -------*/
     // function to create new buttons and append them
     function newButton(butName) {
         var newBut = $("<button>");
@@ -17,6 +23,7 @@ $(document).ready(function(){
         newBut.addClass("instrument");
         $("#topics").append(newBut);
     }
+
     // for each item in topics, create a button
     for (topic in topics){
         var curTopic = topics[topic];
@@ -30,6 +37,7 @@ $(document).ready(function(){
         newButton(newInstrument);
     });
 
+    /*------ QUERY -------*/
     // function to assemble query
     function queryConstructor(){
         fullQuery = baseSearch + searchTerm +"&api_key="+ apiKey +"&limit="+ limit;
@@ -41,6 +49,7 @@ $(document).ready(function(){
         });
     }
 
+    /*------ ONCLICK EVENTS -------*/
     // create onclick for dynamically created search buttons
     $(document).on("click", ".instrument" , function() {
         $("#gifs").empty()
@@ -63,14 +72,17 @@ $(document).ready(function(){
         $("#gifs").append($(this).closest(".thumb"));
     })
 
+    /*------ CREATE GIF THUMBNAILS -------*/
     // create GIF element constructor to plug into queryConstructor
     function makeGif(response){
 
         for (gifs in response){
 
+            // crete new thubnail div
             var newThumb = $("<div>");
             newThumb.addClass("thumb");
 
+            // create gif, add attributes for still and playing
             var newGif = $("<img>");
             var animUrl = response[gifs].images.fixed_height_small.url;
             var stillUrl = response[gifs].images.fixed_height_small_still.url;
@@ -78,6 +90,8 @@ $(document).ready(function(){
             newGif.attr("still", stillUrl);
             newGif.attr("anim", animUrl);
             newGif.attr("isPlay", "false");
+
+            // create onclick function to play/stop gif
             newGif.on("click", function(){
                 if($(this).attr("isPlay") == "false"){
                     $(this).attr("isPlay", "true");
@@ -88,14 +102,17 @@ $(document).ready(function(){
                 }
             })
 
+            // append gif to thumbnail
             newThumb.append(newGif);
 
+            // create div to hold gif data
             var gifData = $("<div>");
 
-
+            // clone favorite heart from HTML, add class for hover functionality
             var newFav = $("#favIcon").clone();
             newFav.removeAttr("id");
             newFav.addClass("favIcon");          
+
 
             gifData.append(newFav);
 
